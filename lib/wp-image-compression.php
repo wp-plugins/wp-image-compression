@@ -21,6 +21,7 @@ class Wpimage {
     }
 
     public function upload($opts = array()) {
+		
         if (!isset($opts['file'])) {
             return array(
                 "success" => false,
@@ -45,10 +46,11 @@ class Wpimage {
             //$file = sprintf('@%s', $opts['file']);
             $file = curl_file_create($opts['file'], 'image/jpeg', $opts['file']);
         } else {
-            $file = sprintf('@%s', $opts['file']);
+            $file = sprintf('%s', $opts['file']);
         }
 
         unset($opts['file']);
+		$file = str_replace($_SERVER['DOCUMENT_ROOT'],'http://'.$_SERVER['HTTP_HOST'],$file);
 		
         $data = array_merge(array(
             "file" => $file,
