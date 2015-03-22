@@ -1,7 +1,7 @@
 <?php
 /**
  * ################################################################################
- * IMSANITY ADMIN/SETTINGS UI
+ * WPIMAGE ADMIN/SETTINGS UI
  * ################################################################################
  */
 
@@ -37,7 +37,7 @@ function wpimages_settings_link($links) {
 function wpimages_create_menu()
 {
 	// create new menu for site configuration
-	add_options_page(__('Wp image resizer Plugin Settings','wpimage'), 'Wp image resizer', 'administrator', __FILE__, 'wpimages_settings_page');
+	add_options_page(__('Wp image converter Plugin Settings','wpimage'), 'Wp image converter', 'administrator', __FILE__, 'wpimages_settings_page');
 
 	// call register settings function
 	add_action( 'admin_init', 'wpimages_register_settings' );
@@ -221,8 +221,8 @@ function wpimages_network_settings()
 	<th scope="row"><?php _e("Global Settings Override",'wpimage'); ?></th>
 	<td>
 		<select name="wpimages_override_site">
-			<option value="0" <?php if ($settings->wpimages_override_site == '0') echo "selected='selected'" ?> ><?php _e("Allow each site to configure Wp image resizer settings",'wpimage'); ?></option>
-			<option value="1" <?php if ($settings->wpimages_override_site == '1') echo "selected='selected'" ?> ><?php _e("Use global Wp image resizer settings (below) for all sites",'wpimage'); ?></option>
+			<option value="0" <?php if ($settings->wpimages_override_site == '0') echo "selected='selected'" ?> ><?php _e("Allow each site to configure Wp image converter settings",'wpimage'); ?></option>
+			<option value="1" <?php if ($settings->wpimages_override_site == '1') echo "selected='selected'" ?> ><?php _e("Use global Wp image Converter settings (below) for all sites",'wpimage'); ?></option>
 		</select>
 	</td>
 	</tr>
@@ -457,7 +457,7 @@ function wpimages_settings_banner()
 	wp_register_script( 'my_plugin_script', plugins_url('/wp-image-compression/scripts/wp-image-compression.js?v='.WPIMAGE_VERSION), array('jquery'));
 	wp_enqueue_script( 'my_plugin_script' );
 	
-	echo '
+	/*echo '
 	<div id="wpimages_header" style="float: left;">
 		<a href="http://verysimple.com/products/wpimage/"><img alt="Wp image resizer" src="' . plugins_url() . '/wpimage/images/wpimage.png" style="float: right; margin-left: 15px;"/></a>
 
@@ -480,7 +480,7 @@ function wpimages_settings_banner()
 
 		sprintf( __("<p>Wp image resizer Version %s by %s </p>",'wpimage'),WPIMAGE_VERSION ,'<a href="http://verysimple.com/">Jason Hinkle</a>') .
 	'</div>
-	<br style="clear:both" />';
+	<br style="clear:both" />';*/
 }
 
 /**
@@ -495,7 +495,7 @@ function wpimages_settings_page()
 	?>
 	<div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
-	<h2><?php _e("Wp image resizer Settings",'wpimage'); ?></h2>
+	<h2><?php _e("Wp image converter Settings",'wpimage'); ?></h2>
 	<?php
 
 	wpimages_settings_banner();
@@ -513,33 +513,33 @@ function wpimages_settings_page()
 
 	?>
 
-	<h2 style="margin-top: 0px;"><?php _e("Bulk Resize Images",'wpimage'); ?></h2>
+	<!--<h2 style="margin-top: 0px;"><?php /*_e("Bulk Resize Images",'wpimage');*/ ?></h2>
 
 	<div id="wpimages_header">
-	<?php _e('<p>If you have existing images that were uploaded prior to installing Wp image resizer, you may resize them
+	<?php /*_e('<p>If you have existing images that were uploaded prior to installing Wp image resizer, you may resize them
 	all in bulk to recover disk space.  To begin, click the "Search Images" button to search all existing
 	attachments for images that are larger than the configured limit.</p>
 	<p>Limitations: For performance reasons a maximum of ' . WPIMAGE_AJAX_MAX_RECORDS . ' images will be returned at one time.  Bitmap
-	image types are not supported and will not appear in the search results.</p>','wpimage'); ?>
+	image types are not supported and will not appear in the search results.</p>','wpimage');*/ ?>
 	</div>
 
 	<div style="border: solid 1px #ff6666; background-color: #ffbbbb; padding: 8px;">
-		<h4><?php _e('WARNING: BULK RESIZE WILL ALTER YOUR ORIGINAL IMAGES AND CANNOT BE UNDONE!','wpimage'); ?></h4>
+		<h4><?php /*_e('WARNING: BULK RESIZE WILL ALTER YOUR ORIGINAL IMAGES AND CANNOT BE UNDONE!','wpimage');*/ ?></h4>
 		
-		<p><?php _e('It is <strong>HIGHLY</strong> recommended that you backup 
+		<p><?php /*_e('It is <strong>HIGHLY</strong> recommended that you backup 
 		your wp-content/uploads folder before proceeding.  You will have a chance to preview and select the images to convert.
 		It is also recommended that you initially select only 1 or 2 images and verify that everything is ok before
-		processing your entire library.  You have been warned!','wpimage'); ?></p>
+		processing your entire library.  You have been warned!','wpimage');*/ ?></p>
 	</div>
 
 	<p class="submit" id="wpimage-examine-button">
-		<button class="button-primary" onclick="wpimages_load_images('wpimages_image_list');"><?php _e('Search Images...','wpimage'); ?></button>
+		<button class="button-primary" onclick="wpimages_load_images('wpimages_image_list');"><?php /*_e('Search Images...','wpimage');*/ ?></button>
 	</p>
-	<div id='wpimages_image_list'></div>
-
+	<div id='wpimages_image_list'></div>-->
 	<?php
 
-	echo '</div>';
+
+	/*echo '</div>';*/
 
 }
 
@@ -550,7 +550,7 @@ function wpimages_settings_page_notice()
 {
 	?>
 	<div class="updated settings-error">
-	<p><strong><?php _e("Wp image resizer settings have been configured by the server administrator. There are no site-specific settings available.",'wpimage'); ?></strong></p>
+	<p><strong><?php _e("Wp image converter settings have been configured by the server administrator. There are no site-specific settings available.",'wpimage'); ?></strong></p>
 	</div>
 
 	<?php
