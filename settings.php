@@ -37,7 +37,7 @@ function wpimages_settings_link($links) {
 function wpimages_create_menu()
 {
 	// create new menu for site configuration
-	add_options_page(__('Wp image converter Plugin Settings','wpimage'), 'Wp image converter', 'administrator', __FILE__, 'wpimages_settings_page');
+	//add_options_page(__('Wp image converter Plugin Settings','wpimage'), 'Wp image converter', 'administrator', __FILE__, 'wpimages_settings_page');
 
 	// call register settings function
 	add_action( 'admin_init', 'wpimages_register_settings' );
