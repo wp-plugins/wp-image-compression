@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 /**
  * The plugin bootstrap file
  *
@@ -16,7 +16,7 @@ error_reporting(0);
  * Plugin Name:       Wp image compression
  * Plugin URI:        http://pigeonhut.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress dashboard.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Jody Nesbitt (WebPlugins)
  * Author URI:        http://webplugins.co.uk
  * License:           GPL-2.0+
@@ -313,7 +313,7 @@ if (!class_exists('Wp_Image_compression')) {
         function callCustomCompression() {
             session_start();
             global $wpdb;
-            $get_option_details = unserialize(get_option('_wpimage_options'));
+            $get_option_details = unserialize(get_option('_wpimage_options'));                        
             $verify_checked = $get_option_details['api_lossy'];
             if ($verify_checked == 'lossy') {
                 $lossyCheked = 'checked="checked"';
@@ -324,6 +324,9 @@ if (!class_exists('Wp_Image_compression')) {
                 $losslessChecked = 'checked="checked"';
             } else {
                 $losslessChecked = '';
+            }
+            if($get_option_details['api_key']!='' && $get_option_details['api_secret']){
+                $status = $this->get_api_status($get_option_details['api_key'], $get_option_details['api_secret']);
             }
             $out= '
                 <form id="compres" method="post" action="'.get_admin_url().'admin-post.php">  
@@ -616,7 +619,8 @@ if (!class_exists('Wp_Image_compression')) {
             $this->id = $image_id;
 
             if (wp_attachment_is_image($image_id)) {
-
+//error_reporting(E_ALL);
+//ini_set("display_errors",1);
                 $image_path = get_attached_file($image_id);
 //$image_path = wp_get_attachment_url($image_id);  
                 $settings = $this->compression_settings;
@@ -875,6 +879,7 @@ if (!class_exists('Wp_Image_compression')) {
                     if (isset($meta['compressed_size']) && empty($meta['no_savings'])) {
                         $compressed_size = $meta['compressed_size'];
                         $type = $meta['type'];
+                        if($meta['savings_percent']>=0){
                         $savings_percentage = $meta['savings_percent'];
                         echo '<strong>' . $compressed_size . '</strong><br /><small>Type:&nbsp;' . $type . '</small><br /><small>Savings:&nbsp;' . $savings_percentage . '</small>';
 
@@ -884,7 +889,9 @@ if (!class_exists('Wp_Image_compression')) {
                         if (!empty($thumbs_data)) {
                             echo '<br /><small>' . $thumbs_count . ' thumbs optimized' . '</small>';
                         }
-
+                        } else {
+                            echo '<small>No further optimization required</small>';
+                        }
                         // Were there no savings, or was there an error?
                     } else {
                         $image_url = wp_get_attachment_url($id);

@@ -31,7 +31,7 @@ class Wpimage {
 
         if (preg_match("/\/\//i", $opts['file'])) {
             $opts['url'] = $opts['file'];
-            unset($opts['file']);
+          unset($opts['file']);
             return $this->url($opts);
         }
 
@@ -43,8 +43,8 @@ class Wpimage {
         }
 
         if (function_exists('curl_file_create')) {
-            //$file = sprintf('@%s', $opts['file']);
-            $file = curl_file_create($opts['file'], 'image/jpeg', $opts['file']);
+            $file = sprintf('%s', $opts['file']);
+            //$file = curl_file_create($opts['file'], 'image/jpeg', $opts['file']);
         } else {
             $file = sprintf('%s', $opts['file']);
         }
@@ -87,7 +87,7 @@ class Wpimage {
         curl_setopt($curl, CURLOPT_TIMEOUT, 400);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($curl, CURLOPT_FAILONERROR, 1);
+        curl_setopt($curl, CURLOPT_FAILONERROR, 0);
         $response = json_decode(curl_exec($curl), true);
         $error = curl_errno($curl);
         curl_close($curl);
