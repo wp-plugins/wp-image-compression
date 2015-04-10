@@ -50,7 +50,8 @@ jQuery(document).ready(function ($) {
         var $button = $(this),
                 $parent = $(this).parent(),
                 $cell = $(this).closest("td");
-
+        //console.log('new');
+        //console.log(data);
         if (data.success && typeof data.error === 'undefined') {
 
             $button.text("Image optimized");
@@ -61,10 +62,12 @@ jQuery(document).ready(function ($) {
                     savingsPercent = data.savings_percent,
                     $originalSizeColumn = $(this).parent().prev("td.original_size"),
                     compressedData = '';
-
+            var withoutLastChunk = savingsPercent.slice(0, savingsPercent.lastIndexOf("%"));
+            //console.log(withoutLastChunk);
             $parent.fadeOut("fast", function () {
                 $cell.find(".noSavings, .wpimageErrorWrap").remove();
-                if (data.savings_percent > 0) {
+                if (withoutLastChunk > 0) {
+                    //console.log('new');
                     compressedData = '<strong>' + compressedSize + '</strong><br /><small>Type:&nbsp;' + type + '</small><br /><small>Savings: ' + savingsPercent + '</small>';
                     if (typeof data.thumbs_data !== 'undefined') {
                         compressedData += '<br /><small>' + data.thumbs_data.length + ' thumbs optimized</small>';
@@ -257,13 +260,15 @@ jQuery(document).ready(function ($) {
                 timeout: 360000
             })
                     .done(function (data, textStatus, jqXHR) {
+                        //console.log('test');
+                        //console.log(data);
                         if (data.success && typeof data.error === 'undefined') {
                             var type = data.type,
                                     originalSize = data.original_size,
                                     compressedSize = data.compressed_size,
                                     savingsPercent = data.savings_percent,
                                     savingsBytes = data.saved_bytes;
-
+                            var withoutLastChunk = savingsPercent.slice(0, savingsPercent.lastIndexOf("%"));
                             $compressedSizeColumn.text(compressedSize);
                             $savingsPercentColumn.text(savingsPercent);
                             $savingsBytesColumn.text(savingsBytes);
@@ -276,13 +281,13 @@ jQuery(document).ready(function ($) {
 
                             $parent.fadeOut("fast", function () {
                                 $cell.find(".noSavings, .wpimageErrorWrap").remove();
-                                if (data.savings_percent > 0) {
+                                if (withoutLastChunk > 0) {
                                     compressedData = '<strong>' + compressedSize + '</strong><br /><small>Type:&nbsp;' + type + '</small><br /><small>Savings: ' + savingsPercent + '</small>';
                                     if (typeof data.thumbs_data !== 'undefined') {
                                         compressedData += '<br /><small>' + data.thumbs_data.length + ' thumbs optimized</small>';
                                     }
                                 } else {
-                                    compressedData='<small>No furhter optimization required</small>';
+                                    compressedData = '<small>No furhter optimization required</small>';
                                 }
                                 $(this).replaceWith(compressedData);
                                 $originalSizeColumn.html(originalSize);

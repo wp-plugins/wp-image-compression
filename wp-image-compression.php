@@ -16,7 +16,7 @@
  * Plugin Name:       Wp image compression
  * Plugin URI:        http://pigeonhut.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress dashboard.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Jody Nesbitt (WebPlugins)
  * Author URI:        http://webplugins.co.uk
  * License:           GPL-2.0+
