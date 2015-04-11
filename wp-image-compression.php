@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 /**
  * The plugin bootstrap file
  *
@@ -16,7 +16,7 @@
  * Plugin Name:       Wp image compression
  * Plugin URI:        http://pigeonhut.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress dashboard.
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Jody Nesbitt (WebPlugins)
  * Author URI:        http://webplugins.co.uk
  * License:           GPL-2.0+
@@ -305,7 +305,7 @@ if (!class_exists('Wp_Image_compression')) {
             wp_register_style('compression-css', $pluginDirectory . 'css/compression.css');
             wp_enqueue_style('compression-css');
             $my_plugin_tabs = array(
-                'wp-convertor' => 'Image Dimension',                
+                'wp-convertor' => 'Image Dimension',
             );
             echo $this->admin_tabs_callmeback($my_plugin_tabs);
         }
@@ -313,7 +313,7 @@ if (!class_exists('Wp_Image_compression')) {
         function callCustomCompression() {
             session_start();
             global $wpdb;
-            $get_option_details = unserialize(get_option('_wpimage_options'));                        
+            $get_option_details = unserialize(get_option('_wpimage_options'));
             $verify_checked = $get_option_details['api_lossy'];
             if ($verify_checked == 'lossy') {
                 $lossyCheked = 'checked="checked"';
@@ -325,11 +325,11 @@ if (!class_exists('Wp_Image_compression')) {
             } else {
                 $losslessChecked = '';
             }
-            if($get_option_details['api_key']!='' && $get_option_details['api_secret']){
+            if ($get_option_details['api_key'] != '' && $get_option_details['api_secret']) {
                 $status = $this->get_api_status($get_option_details['api_key'], $get_option_details['api_secret']);
             }
-            $out= '
-                <form id="compres" method="post" action="'.get_admin_url().'admin-post.php">  
+            $out = '
+                <form id="compres" method="post" action="' . get_admin_url() . 'admin-post.php">  
                     <fieldset>                            
                         <input type=\'hidden\' name=\'action\' value=\'submit-compression-form\' />                       
             <div>
@@ -360,7 +360,7 @@ if (!class_exists('Wp_Image_compression')) {
                             <th scope="row">API status:</th>
                             <td>';
             $url = admin_url() . 'images/';
-            if ($_SESSION['status'] == 'updated') {
+            if ($status == true) {
                 $url .= 'yes.png';
                 $out.= '<p class = "apiStatus">Your credentials are valid <span class = "apiValid" style = "background:url(' . "'$url') no-repeat scroll 0 3px;
             width:16px;
@@ -375,7 +375,7 @@ if (!class_exists('Wp_Image_compression')) {
             float:left;
             " . '"></span></p>';
             }
-            
+
             $out.='</td>
             </tr>
             </tbody>
@@ -386,8 +386,7 @@ if (!class_exists('Wp_Image_compression')) {
             </fieldset>
             </form>                        
            ';
-           return $out;
-            
+            return $out;
         }
 
         function saveCompressionSettings() {
@@ -419,10 +418,10 @@ if (!class_exists('Wp_Image_compression')) {
             $this->compressionTabs();
             ?>
             <script>
-                jQuery(document).ready(function() {
+                jQuery(document).ready(function () {
                     jQuery("body").addClass("wps-admin-page");
                     // binds form submission and fields to the validation engine          
-                    jQuery(".wps-postbox-container .handlediv, .wps-postbox-container .hndle").on("click", function(n) {
+                    jQuery(".wps-postbox-container .handlediv, .wps-postbox-container .hndle").on("click", function (n) {
                         return n.preventDefault(), jQuery(this).parent().toggleClass("closed");
                     });
                 });
@@ -478,14 +477,14 @@ if (!class_exists('Wp_Image_compression')) {
                                     <th scope="row"><?php _e("Convert BMP To JPG", 'wpimage'); ?></th>
                                     <td><select name="wpimages_bmp_to_jpg">
                                             <option <?php
-                                            if (get_option('wpimages_bmp_to_jpg', WPIMAGE_DEFAULT_BMP_TO_JPG) == "1") {
-                                                echo "selected='selected'";
-                                            }
+                                if (get_option('wpimages_bmp_to_jpg', WPIMAGE_DEFAULT_BMP_TO_JPG) == "1") {
+                                    echo "selected='selected'";
+                                }
                                             ?> value="1"><?php _e("Yes", 'wpimage'); ?></option>
                                             <option <?php
-                                            if (get_option('wpimages_bmp_to_jpg', WPIMAGE_DEFAULT_BMP_TO_JPG) == "0") {
-                                                echo "selected='selected'";
-                                            }
+                                if (get_option('wpimages_bmp_to_jpg', WPIMAGE_DEFAULT_BMP_TO_JPG) == "0") {
+                                    echo "selected='selected'";
+                                }
                                             ?> value="0"><?php _e("No", 'wpimage'); ?></option>
                                         </select></td>
                                 </tr>
@@ -494,14 +493,14 @@ if (!class_exists('Wp_Image_compression')) {
                                     <th scope="row"><?php _e("Convert PNG To JPG", 'wpimage'); ?></th>
                                     <td><select name="wpimages_png_to_jpg">
                                             <option <?php
-                                            if (get_option('wpimages_png_to_jpg', WPIMAGE_DEFAULT_PNG_TO_JPG) == "1") {
-                                                echo "selected='selected'";
-                                            }
+                                if (get_option('wpimages_png_to_jpg', WPIMAGE_DEFAULT_PNG_TO_JPG) == "1") {
+                                    echo "selected='selected'";
+                                }
                                             ?> value="1"><?php _e("Yes", 'wpimage'); ?></option>
                                             <option <?php
-                                            if (get_option('wpimages_png_to_jpg', WPIMAGE_DEFAULT_PNG_TO_JPG) == "0") {
-                                                echo "selected='selected'";
-                                            }
+                                if (get_option('wpimages_png_to_jpg', WPIMAGE_DEFAULT_PNG_TO_JPG) == "0") {
+                                    echo "selected='selected'";
+                                }
                                             ?> value="0"><?php _e("No", 'wpimage'); ?></option>
                                         </select></td>
                                 </tr>
@@ -879,16 +878,16 @@ if (!class_exists('Wp_Image_compression')) {
                     if (isset($meta['compressed_size']) && empty($meta['no_savings'])) {
                         $compressed_size = $meta['compressed_size'];
                         $type = $meta['type'];
-                        if($meta['savings_percent']>=0){
-                        $savings_percentage = $meta['savings_percent'];
-                        echo '<strong>' . $compressed_size . '</strong><br /><small>Type:&nbsp;' . $type . '</small><br /><small>Savings:&nbsp;' . $savings_percentage . '</small>';
+                        if ($meta['savings_percent'] >= 0) {
+                            $savings_percentage = $meta['savings_percent'];
+                            echo '<strong>' . $compressed_size . '</strong><br /><small>Type:&nbsp;' . $type . '</small><br /><small>Savings:&nbsp;' . $savings_percentage . '</small>';
 
-                        $thumbs_data = get_post_meta($id, '_compressed_thumbs', true);
-                        $thumbs_count = count($thumbs_data);
+                            $thumbs_data = get_post_meta($id, '_compressed_thumbs', true);
+                            $thumbs_count = count($thumbs_data);
 
-                        if (!empty($thumbs_data)) {
-                            echo '<br /><small>' . $thumbs_count . ' thumbs optimized' . '</small>';
-                        }
+                            if (!empty($thumbs_data)) {
+                                echo '<br /><small>' . $thumbs_count . ' thumbs optimized' . '</small>';
+                            }
                         } else {
                             echo '<small>No further optimization required</small>';
                         }
