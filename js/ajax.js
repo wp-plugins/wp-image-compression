@@ -269,9 +269,15 @@ jQuery(document).ready(function ($) {
                                     savingsPercent = data.savings_percent,
                                     savingsBytes = data.saved_bytes;
                             var withoutLastChunk = savingsPercent.slice(0, savingsPercent.lastIndexOf("%"));
-                            $compressedSizeColumn.text(compressedSize);
-                            $savingsPercentColumn.text(savingsPercent);
-                            $savingsBytesColumn.text(savingsBytes);
+                            if (withoutLastChunk > 0) {
+                                $compressedSizeColumn.text(compressedSize);
+                                $savingsPercentColumn.text(savingsPercent);
+                                $savingsBytesColumn.text(savingsBytes);
+                            } else {
+                                $compressedSizeColumn.text('No more compression');
+                                $savingsPercentColumn.text('0%');
+                                $savingsBytesColumn.text('0 kb');
+                            }
 
                             var $button = $("button[id='wpimageid-" + id + "']"),
                                     $parent = $button.parent(),
