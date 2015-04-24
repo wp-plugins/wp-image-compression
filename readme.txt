@@ -3,7 +3,7 @@ Contributors: Web9
 Donate link: 
 Tags: Image Optemise, image compression, small image, Resize, Compress Images
 Requires at least: 3.0
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: 2.0
 
 
@@ -26,7 +26,7 @@ WP Image Compression is a quick and easy way to not only resize your images.  We
 
 We have also added image compression through the awesome PNG Quant (http://pngquant.org/) which will generate on average 65-80% compression with little to no loss of quality across your images.
 
-First 200MB per month is free for all users, Compression packages start from only £3.00 per month (http://www.wpimage.co.uk/compresion-plans/) which covers you upto 1GB per month.
+First 200MB per month is free for all users, Compression packages start from only ï¿½3.00 per month (http://www.wpimage.co.uk/compresion-plans/) which covers you upto 1GB per month.
 
 == Installation ==
 
