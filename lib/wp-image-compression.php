@@ -68,7 +68,8 @@ class Wpimage {
     public function status() {
         $data = array('auth' => array(
                 'api_key' => $this->auth['auth']['api_key'],
-                'api_secret' => $this->auth['auth']['api_secret']
+                'api_secret' => $this->auth['auth']['api_secret'],
+                'site_url' => $_SERVER['HTTP_HOST']
         ));
 
         //$response = self::request(json_encode($data), "https://api.wp-image.co.uk/user_status");
